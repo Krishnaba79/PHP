@@ -1,0 +1,15 @@
+<!-- 4.Write a duifference between get and post method 
+
+GET METHOD :
+Use GET for retrieving data from the server, such as searching or filtering data.
+Use GET when the data is not sensitive and the user needs to be able to bookmark or share the URL..
+Use GET when the data is small and can fit in the query string.
+Use GET when the request should be cached by browsers and proxies.
+Use GET when the request should be idempotent.
+
+POST METHOD :
+Use POST when the request should not be idempotent
+Use POST when the request should not be cached by browsers and proxies.
+Use POST when the data is large and needs to be sent in the request body.
+Use POST when the data is sensitive and should not be visible in the URL.
+Use POST for sending data to the server for modification or creation, such as submitting a form with sensitive data.

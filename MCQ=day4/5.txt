@@ -1,0 +1,31 @@
+<!-- 5.Write  difference between session and cookies. -->
+
+Storage: Sessions store data on the server, while cookies store 
+data on the client's browser.
+
+Lifetime: Sessions have a limited lifetime and are destroyed when
+ the user closes the browser or after a certain period of 
+ inactivity, while cookies can have a longer lifetime and can 
+ persist even after the browser is closed.
+
+
+Security: Sessions are generally more secure than cookies 
+because the data is stored on the server and not on the client's 
+browser. Cookies can be accessed and modified by the client, which
+ can pose a security risk.
+
+
+Size: Sessions can store larger amounts of data than cookies 
+because the data is stored on the server. Cookies have a size 
+limit of 4KB.
+
+
+Visibility: Sessions are not visible to the user, while cookies 
+are visible to the user and can be viewed and deleted through the 
+browser's settings.
+
+
+Performance: Sessions can have a performance impact on the server
+ because they require server resources to store and manage the 
+ data. Cookies, on the other hand, have a minimal performance 
+ impact because they are stored on the client's browser.
