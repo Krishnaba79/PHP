@@ -7,11 +7,9 @@
 </head>
 <body>
     <?php
-        var_dump(5,"<br>");
-        var_dump("krishna","<br>");
-        var_dump(3.14,"<br>");
-        var_dump([2,3,56],"<br>");
-        var_dump(NULL,"<br>");
+    echo "My first PHP script";
+    echo "<br>";
+    echo "Hello World";
     ?>
 </body>
 </html>

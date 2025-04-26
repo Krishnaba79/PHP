@@ -7,54 +7,39 @@
 </head>
 <body>
     <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $db = "form";
 
-    $conn = new mysqli("$servername","$username","$password","$db");
+    $servername="localhost";
+    $username="root";
+    $password="";
+    $db="dharm";
 
-    if($conn)
-    {
-        echo "Database Connection";
+    $conn=new mysqli("$servername","$username","$password","$db");
+    if($conn){
+        echo "database connected";
+    }else{
+        echo "error";
     }
-    else
-    {
-        echo "Error!";
-    }
+    if(isset($_POST['submit'])){
+        $row=mysqli_fetch_array($select_data);
 
-    if(isset($_POST['submit']))
-
-    {
-        $password = $_POST['password'];
-        $email = $_POST['email'];
-
-        $select_query = "SELECT * FROM information WHERE email='".$email."' AND password ='".$password."' ";
-        $select_data = mysqli_query($conn,$select_query);
-        $row = mysqli_fetch_array($select_data);
-// print_r($row);
-// exit;
-        if($row)
-        {
-            $_SESSION['email'] = $row['email'];
-            echo "<script>window.location.href='welcome.php';</script>";
+        if ($row){
+            $_SESSION['email']=$row['email'];
+            echo"<script>window.location.href='welcome';</script>";
         }
-        else
-        {
-            echo "Invalid";
+        else{
+            echo "invalid";
         }
-    }
+        }
     ?>
+<form method ="post">
+    <label > enter your password:</label>
+    <input type ="password" id="password" name="password">
 
-    <form method="POST">
-        <lable>Enter Your Password: </lable>
-        <input type="password" id="password" name="password">
+    <label> enter your email: </label>
+    <input type = "email" id="email" name="email">
 
-        <lable>Enter Your Email: </lable>
-        <input type="email" id="email" name="email">
-
-        <input type="submit" id="submit" name="submit" value="submit">
-    </form>
-    Code Suggestions
+    <input type = "submit" name="submit" id="submit">
+</form>
+    
 </body>
 </html>

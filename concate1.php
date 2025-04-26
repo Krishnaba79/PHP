@@ -7,11 +7,15 @@
 </head>
 <body>
     <?php
-        var_dump(5,"<br>");
-        var_dump("krishna","<br>");
-        var_dump(3.14,"<br>");
-        var_dump([2,3,56],"<br>");
-        var_dump(NULL,"<br>");
+
+    $txt1="learn php";
+    $txt2="w3schools.com";
+    $x=5;
+    $y=4;
+
+    echo "<h2>".$txt1. "<h2>";
+    echo "study php at" .$txt2. "<br>";
+    echo $x + $y;
     ?>
 </body>
 </html>

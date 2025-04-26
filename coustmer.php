@@ -40,7 +40,7 @@
 
     ?>
 
-    <table border ="1">
+<table border ="1">
         <tr>
 
         <th> id </th>
@@ -49,8 +49,6 @@
         <th> pincode </th>
         <th> email </th>
         <th> delete </th>
-
-        
         </tr>
         <!-- print_r(mysqli_fetch_array($select_data));-->
 
@@ -69,8 +67,7 @@
         }
         ?>
 
-
-        <form method ="post">
+<form method ="post">
             <br>
             <label> Enter your name </label>
             <input type = "text" name = "name" placeholder="name"/>
@@ -88,5 +85,12 @@
             <input type ="submit" name = "submit"/>
         </form>
 
+
+
+
+
+
+
 </body>
+
 </html>

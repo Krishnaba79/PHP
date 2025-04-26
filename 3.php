@@ -6,31 +6,76 @@
     <title>Document</title>
 </head>
 <body>
-    
-    <form action="" method="post">
-        Enter The Number :
-        <input type="number" name="num">
+    <form method="post">
+        <label>Enter Your Id:</label>
+        <input type="number" name="id"><br>
+        <label>Enter Your Name:</label>
+        <input type="text" name="name"><br>
+        <label>Enter Your Salary:</label>
+        <input type="number" name="salary"><br>
+        <label>Enter Your Status:</label>
+        <input type="text" name="status"><br>
+        <label>Enter Your Job:</label>
+        <input type="text" name="job"><br>
+
         <input type="submit" name="submit">
+
     </form>
-
-    <?php
-    
-        if(isset($_POST['submit']))
-        {
-            $num = $_POST['num'];
-
-            for($i = 0; $i < $num; $i++) {
-                // print spaces
-                for($j = 1; $j < $num - $i; $j++) {
-                    echo "&nbsp;&nbsp;";
-                }
-                // print stars
-                for($k = 0; $k <= $i; $k++) {
-                    echo "*";
-                }
-                echo "<br>";
-            }
-        }
-    ?>
 </body>
 </html>
+<?php
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $db = "exam";
+
+    $conn = new mysqli("$servername","$username","$password","$db");
+
+    if($conn)
+    {
+        echo "Database Connected";
+        echo "<br>";
+    }
+    else
+    {
+        echo "Error!";
+        echo "<br>";
+    }
+
+    if(isset($_POST['submit']))
+    {
+        $id = $_POST['id'];
+        $name = $_POST['name'];
+        $salary = $_POST['salary'];
+        $status = $_POST['status'];
+        $job = $_POST['job'];
+
+        $sql = "INSERT INTO employee (`id`,`name`,`salary`,`status`,`job`)
+        VALUES ('".$id."','".$name."','".$salary."','".$status."','".$job."')";
+
+        $insert = $conn->query($sql);
+
+        if($insert)
+        {
+            echo "Data Inserted";
+        }
+        else{
+            echo "Error!";
+        }
+        
+    }
+
+    
+$select_query = "SELECT MIN(salary), MAX(salary) FROM employee"; 
+$select_data = mysqli_query($conn,$select_query);
+
+// print_r(mysqli_fetch_array($select_data));
+
+while($row=mysqli_fetch_array($select_data))
+{
+    echo "Mininum Salary: ".$row['MIN(salary)'];
+    echo "<br>";
+    echo "Maximum Salary: ".$row['MAX(salary)'];
+    echo "<br>";
+}
+?>
