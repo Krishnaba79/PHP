@@ -1,21 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<?php
+session_start();
 
-    Welcome 
-
-    <?php
-    echo $_POST["name"];
-    echo "<br>";
-    ?>
-
-    Your email address is:
-    <?php echo $_POST["email"]; ?>
-
-</body>
-</html>
+if($_SESSION['email'])
+{
+    echo "welcome".$SESSION['email'];
+}
+else
+{
+    echo "<script>window.location.href='form.php';</script>";
+}
+?>
