@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List App</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .completed {
+            text-decoration: line-through;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>To-Do List</h2>
+
+    <form id="taskForm">
+        <input type="text" id="taskDescription" placeholder="Enter Task" required>
+        <button type="submit" id="addTaskButton">Add Task</button>
+        <p id="errorMessage" class="error"></p>
+    </form>
+
+    <ul id="taskList"></ul>
+
+    <script>
+        $(document).ready(function(){
+            // Add Task
+            $('#taskForm').on('submit', function(e) {
+                e.preventDefault();  // Prevent form from reloading the page
+
+                // Get the task description value
+                let taskDescription = $('#taskDescription').val().trim();
+
+                if(taskDescription === "") {
+                    // Display error message for empty task
+                    $('#errorMessage').text('Task description cannot be empty');
+                } else {
+                    // Clear error message if any
+                    $('#errorMessage').text('');
+
+                    // Add the task to the task list
+                    $('#taskList').append(
+                        '<li>' + taskDescription + 
+                        ' <button class="deleteTask">Delete</button>' +
+                        '</li>'
+                    );
+
+                    // Clear the input field
+                    $('#taskDescription').val('');
+                }
+            });
+
+            // Mark Task as Completed (toggle strikethrough)
+            $('#taskList').on('click', 'li', function() {
+                $(this).toggleClass('completed');
+            });
+
+            // Delete Task
+            $('#taskList').on('click', '.deleteTask', function(e) {
+                e.stopPropagation();  // Prevent triggering the 'li' click event
+                $(this).parent().remove();
+            });
+        });
+    </script>
+
+</body>
+</html>

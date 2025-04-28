@@ -1,0 +1,18 @@
+#mainwrapper{
+    display: flex;
+}
+
+button{
+    font-size: 26px;
+    padding: 10px 6px;
+}
+
+#redbtn{
+    background-color: red;
+}
+#bluebtn{
+    background-color: blue;
+}
+#greenbtn{
+    background-color: green;
+}

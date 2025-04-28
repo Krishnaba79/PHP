@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>iPhone 16</title>
+  <style>
+    * { padding: 0; margin: 0; }
+    .flexingdiv { display: flex; flex-direction: row; margin-left: 35vh; }
+    .content { margin-top: 20vh; margin-left: 15vh; }
+    .sizing { height: 15vh; }
+    .images {
+      width: 300px;
+      height: 500px;
+      overflow: hidden;
+    }
+    .mainimg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .leftarrow, .rightarrow { padding: 8px; }
+    .npbutton { margin-top: 5vh; margin-left: 10vh; }
+    .buynowbtn { padding: 2vh; background-color: #4caf50; color: white; }
+    .buynow { margin-top: 5vh; margin-left: 5vh; }
+  </style>
+</head>
+<body>
+  <h1>iPhone 16</h1>
+  <div class="flexingdiv">
+    <div class="images">
+      <img src="./images/iphone/pinkbackfrontside.jpg" class="mainimg" />
+    </div>
+    <div class="content">
+      <h3>iPhone 16 128GB 6GB RAM</h3>
+      <h4>Charging Port C</h4>
+      <div class="flexingdiv sizing">
+        <img src="./images/iphone/bluebackforntside.jpg" class="blueiphone" />
+        <img src="./images/iphone/pinkbackfrontside.jpg" class="pinkiphone" />
+      </div>
+      <div>
+        <h4>Price 50000</h4>
+        <input type="number" class="quantity" value="1" />
+        <label>Total Amount: </label>
+        <span>50000</span>
+      </div>
+      <div class="npbutton">
+        <button class="leftarrow">‹</button>
+        <span class="imgcount">1</span>
+        <span>/3</span>
+        <button class="rightarrow">›</button>
+      </div>
+      <div class="buynow">
+        <button class="buynowbtn">Buy Now</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./jquery-Document.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      const imageSets = {
+        pink: [
+          "./images/iphone/pinkbackfrontside.jpg",
+          "./images/iphone/pinkfrontside.jpg",
+          "./images/iphone/pinkbackside.jpg"
+        ],
+        blue: [
+          "./images/iphone/bluebackforntside.jpg",
+          "./images/iphone/blueforntside.jpg",
+          "./images/iphone/bluebackside.jpg"
+        ]
+      };
+
+      let currentImages = imageSets.pink;
+      let currentIndex = 0;
+
+      function updateMainImage() {
+        $(".mainimg").attr("src", currentImages[currentIndex]);
+        $(".imgcount").text(currentIndex + 1);
+      }
+
+      $(".pinkiphone").click(function () {
+        currentImages = imageSets.pink;
+        currentIndex = 0;
+        updateMainImage();
+      });
+
+      $(".blueiphone").click(function () {
+        currentImages = imageSets.blue;
+        currentIndex = 0;
+        updateMainImage();
+      });
+
+      $(".leftarrow").click(function () {
+        if (currentIndex > 0) {
+          currentIndex -= 1;
+          updateMainImage();
+        }
+      });
+
+      $(".rightarrow").click(function () {
+        if (currentIndex < currentImages.length - 1) {
+          currentIndex += 1;
+          updateMainImage();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

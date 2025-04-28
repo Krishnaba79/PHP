@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div id="mainwrapper">
+
+        <img src="./images/red/1.PNG" alt="" srcset="">
+        <div>
+
+            <h1>IPHONE 15</h1>
+            <button id="redbtn">RED</button>
+            <button id="bluebtn">Blue</button>
+            <button id="greenbtn">Green</button>
+            <div style="margin-top: 100px;">
+                <button id="nextbtn">Next</button>
+                <button id="prevbtn">Previous</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="./jquery-3.7.1.min.js"></script>
+    <script>
+        let color = 0;
+        let current = 0;
+
+        all_photos = [
+            ["./images/red/1.PNG", "./images/red/2.PNG", "./images/red/3.PNG"],
+            ["./images/blue/1.PNG", "./images/blue/2.PNG", "./images/blue/3.PNG"],
+            ["./images/green/1.PNG", "./images/green/2.PNG", "./images/green/3.PNG"]
+        ];
+
+
+        $("#redbtn").click(function () {
+            $("img").attr("src", all_photos[0][0]);
+            color = 0;
+        })
+        $("#bluebtn").click(function () {
+            $("img").attr("src", all_photos[1][0]);
+            color = 1;
+        })
+        $("#greenbtn").click(function () {
+            $("img").attr("src", all_photos[2][0]);
+            color = 2;
+        })
+
+        $("#nextbtn").click(function () {
+            console.log("hii", current);
+            if (current >= 2) {
+                current = 0;
+            }
+            else {
+                current++;
+            }
+            console.log("done", current);
+            $("img").attr("src", all_photos[color][current]);
+        })
+
+        $("#prevbtn").click(function () {
+
+            if (current < 0) {
+                current = 2;
+                current--;
+            }
+            else {
+
+                current--;
+            }
+            $("img").attr("src", all_photos[color][current]);
+        })
+
+
+    </script>
+
+</body>
+
+</html>
