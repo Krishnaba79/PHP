@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Management System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .form-group {
+      margin-bottom: 10px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    input[type="text"], input[type="email"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 10px 15px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:disabled {
+      background-color: #aaa;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    table, th, td {
+      border: 1px solid black;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+    .delete-btn, .edit-btn {
+      background-color: red;
+      color: white;
+      padding: 5px 10px;
+      border: none;
+      cursor: pointer;
+    }
+    .edit-btn {
+      background-color: orange;
+      margin-right: 5px;
+    }
+    .error {
+      color: red;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Employee Management System</h1>
+
+<!-- Form for adding/editing employees -->
+<div class="form-container">
+  <div class="form-group">
+    <label for="name">Employee Name:</label>
+    <input type="text" id="name">
+  </div>
+  <div class="form-group">
+    <label for="department">Employee Department:</label>
+    <input type="text" id="department">
+  </div>
+  <div class="form-group">
+    <label for="empID">Employee ID:</label>
+    <input type="text" id="empID">
+  </div>
+  <div class="form-group">
+    <label for="email">Employee Email:</label>
+    <input type="email" id="email">
+  </div>
+  <div class="error"></div>
+  <button id="addEmployee">Add Employee</button>
+</div>
+
+<!-- Table to display employees -->
+<table id="employeeTable">
+  <thead>
+    <tr>
+      <th>Employee Name</th>
+      <th>Department</th>
+      <th>ID</th>
+      <th>Email</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Employee rows will be added here dynamically -->
+  </tbody>
+</table>
+
+<!-- jQuery CDN -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+$(document).ready(function() {
+  let editingRow = null; // To track the row being edited
+
+  // Function to validate the form inputs
+  function validateForm() {
+    let isValid = true;
+    $('.error').text(''); // Clear previous error messages
+    if ($('#name').val() === '') {
+      $('.error').text('Please enter the Employee Name.');
+      isValid = false;
+    } else if ($('#department').val() === '') {
+      $('.error').text('Please enter the Employee Department.');
+      isValid = false;
+    } else if ($('#empID').val() === '') {
+      $('.error').text('Please enter the Employee ID.');
+      isValid = false;
+    } else if ($('#email').val() === '') {
+      $('.error').text('Please enter the Employee Email.');
+      isValid = false;
+    }
+    return isValid;
+  }
+
+  // Add/Edit Employee button click event
+  $('#addEmployee').on('click', function() {
+    if (validateForm()) {
+      const name = $('#name').val();
+      const department = $('#department').val();
+      const empID = $('#empID').val();
+      const email = $('#email').val();
+
+      if (editingRow) {
+        // Edit mode: Update the existing row
+        editingRow.find('td:eq(0)').text(name);
+        editingRow.find('td:eq(1)').text(department);
+        editingRow.find('td:eq(2)').text(empID);
+        editingRow.find('td:eq(3)').text(email);
+        editingRow = null;
+        $('#addEmployee').text('Add Employee'); // Change button text back to Add
+      } else {
+        // Add mode: Create a new row for the employee table
+        const newRow = `<tr>
+          <td>${name}</td>
+          <td>${department}</td>
+          <td>${empID}</td>
+          <td>${email}</td>
+          <td>
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">Delete</button>
+          </td>
+        </tr>`;
+
+        $('#employeeTable tbody').append(newRow);
+      }
+
+      // Clear the input fields after adding/updating the employee
+      $('#name').val('');
+      $('#department').val('');
+      $('#empID').val('');
+      $('#email').val('');
+    }
+  });
+
+  // Event delegation to handle dynamically added edit buttons
+  $('#employeeTable').on('click', '.edit-btn', function() {
+    // Get the row being edited
+    editingRow = $(this).closest('tr');
+
+    // Load the row's data into the form fields
+    $('#name').val(editingRow.find('td:eq(0)').text());
+    $('#department').val(editingRow.find('td:eq(1)').text());
+    $('#empID').val(editingRow.find('td:eq(2)').text());
+    $('#email').val(editingRow.find('td:eq(3)').text());
+
+    // Change the button text to "Save Changes"
+    $('#addEmployee').text('Save Changes');
+  });
+
+  // Event delegation to handle dynamically added delete buttons
+  $('#employeeTable').on('click', '.delete-btn', function() {
+    $(this).closest('tr').remove(); // Remove the employee row
+  });
+});
+</script>
+
+</body>
+</html>

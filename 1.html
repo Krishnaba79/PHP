@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Display JSON Data</title>
+  </head>
+  <body>
+    <h1 class="fname1">First Name 1</h1>
+    <h1 class="fname2">First Name 2</h1>
+    <h2 class="lname">Last Name</h2>
+    <h2 class="mail">Email</h2>
+
+    <button>Click for next</button>
+
+    <!-- Importing jQuery -->
+    <script src="./jquery-3.7.1.min.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        let index = 0;
+
+        $("button").click(function () {
+          var xhr = new XMLHttpRequest();
+          xhr.open("GET", "./xhp.json", true); // Ensure the correct path to xhp.json
+
+          xhr.onload = function () {
+            if (xhr.status >= 200 && xhr.status < 300) {
+              var data = JSON.parse(xhr.responseText);
+
+              // Reset index if it exceeds the array length
+              if (index >= data.length) {
+                index = 0;
+              }
+
+              // Update the DOM elements with JSON data
+              $(".fname1").text(data[index].firstname.first);
+              $(".fname2").text(data[index].firstname.last);
+              $(".lname").text(data[index].lastname);
+              $(".mail").text(data[index].mail);
+
+              // Increment the index for next click
+              index++;
+            } else {
+              console.log("API request failed with status " + xhr.status);
+            }
+          };
+
+          xhr.onerror = function () {
+            console.log("Network error or request failed.");
+          };
+
+          xhr.send();
+        });
+      });
+    </script>
+  </body>
+</html>

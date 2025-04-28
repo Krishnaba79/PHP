@@ -1,0 +1,37 @@
+<html>
+    <body>
+        <label>Enter the number</label>
+        <input type="number"id="input"/>
+        <input type="submit" id="submit" value="submit"/>
+        <input type="submit" id="sort" value="Sort"/>
+
+        <div id="output"></div>
+        <script src="C:\Users\solan\Desktop\SEM-5\PHP\jquery-3.7.1.min.js"></script>
+        <script>
+            $(document.ready(function(){
+                let numbers=[];
+
+                $("#submit").click(function(){
+                    let input=$("#input").val();
+                    if(input){
+                        numbers.push(parseFloat(input));//Store the number in array
+                        $("#output").append(input+"<br>");
+                        $("#input").val(""); //clear the input field
+                    }
+                });
+
+                $("#sort").click(function(){
+                    numbers.sort(function(a,b){
+                        return a-b; // Sort numbers in ascending order
+
+                    });
+
+                $("output").emplty(); //clear the current output
+                numbers.forEach(function (num){
+                    $("#output").append(num+"<br>"); //Display sorted numbers
+                    });
+                });
+            }));
+        </script>
+    </body>
+</html>
