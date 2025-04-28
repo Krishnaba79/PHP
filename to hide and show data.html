@@ -1,0 +1,37 @@
+<html>
+    <script src="C:\Users\solan\Desktop\SEM-5\PHP\jquery-3.7.1.min.js"></script>
+    <body>
+        <h1> Create a webpage that displays a list of items and allows the user to hide or show the list items using a button.</h1>
+        <button id="toggle-btn">Toggle List</button>
+        <button id="hide-btn">Hide List</button>
+        <button id="show-btn">Show List</button>
+        <ul id="mylist">
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+            <li>Item 4</li>
+            <li>Item 5</li>
+        </ul>
+        <script>
+            $(document).ready(function(){
+                $("#toggle-btn").click(function(){
+                    $("#mylist").toggle();
+
+                });
+            });
+
+            $(document).ready(function(){
+                $("#hide-btn").click(function(){
+                    $("#mylist").hide();
+
+                });
+            });
+            $(document).ready(function(){
+                $("#show-btn").click(function(){
+                    $("#mylist").show();
+
+                });
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,26 @@
+<html>
+    <body>
+        <p id="para"> Solanki Krishnaba</p>
+        <button id="hide-btn"> hide</button>
+        <button id="show-btn"> show</button>
+        <button id="toggle-btn"> toggle</button>
+
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+
+        <script>
+            $("#hide-btn").click(function()
+        {
+            $("#para").hide(1000);
+        });
+
+        $("#show-btn").click(function(){
+            $("#para").show(1000);
+        });
+
+        $("#toggle-btn").click(function () {
+            $("#para").toggle(1000);
+        });
+        </script>
+
+    </body>
+</html>

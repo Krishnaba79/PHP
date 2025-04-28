@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management System</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            background-color: #ebe2e2;
+        }
+       
+        .container {
+            max-width: 700px;
+            margin: 10px;
+            padding: 20px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+        }
+        table,td{
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+       
+        .detail {
+            margin-bottom: 15px;
+        }
+        .detail label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .detail input {
+            width: 100%;
+            padding: 8px;
+            
+        }
+        .btn {
+            padding: 10px 10px;
+            background-color: black;
+            color: white;
+        }
+        .btn-edit {
+            background-color: black;
+        }
+        .btn-delete {
+            background-color: black;
+        }
+        .btn-sm {
+            padding: 5px 10px;
+            font-size: 14px;
+        }
+        .btn + .btn {
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Student Management System</h2>
+    
+    <!-- Student Form -->
+    <form id="studentForm">
+        <div class="detail">
+            <label for="studentName">Name:</label>
+            <input type="text" id="studentName" required>
+        </div>
+        <div class="detail">
+            <label for="studentCourse">Course:</label>
+            <input type="text" id="studentCourse" required>
+        </div>
+        <div class="detail">
+            <label for="studentSemester">Semester:</label>
+            <input type="number" id="studentSemester" required>
+        </div>
+        <div class="detail">
+            <label for="studentPhonenumber">Phone number:</label>
+            <input type="number" id="studentPhonenumber" required>
+        </div>
+        <button type="submit" class="btn">Add Student</button>
+    </form>
+    
+    <!-- Student Table -->
+    <table>
+       
+            <tr>
+                <td>ID</td>
+                <td>Name</td>
+                <td>Course</td>
+                <td>Semester</td>
+                <td>Phonenumber</td>
+                <td>Update/Delete</td>
+            </tr>
+        
+        <tbody id="studentTable">
+            <!-- Student rows will be added here -->
+        </tbody>
+    </table>
+</div>
+
+<script src="./jquery-3.7.1.min.js"></script>
+<script>
+$(document).ready(function () {
+    let students = [];
+    let editingStudentIndex = -1;
+
+    // Function to render student data in the table
+    function renderTable() {
+        const studentTable = $('#studentTable');
+        studentTable.empty(); // Clear the table first
+        students.forEach((student, index) => {
+            studentTable.append(`
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${student.name}</td>
+                    <td>${student.course}</td>
+                    <td>${student.semester}</td>
+                    <td>${student.phonenumber}</td>
+                    <td>
+                        <button class="btn btn-edit btn-sm edit" data-index="${index}">update</button>
+                        <button class="btn btn-delete btn-sm delete" data-index="${index}">Delete</button>
+                    </td>
+                </tr>
+            `);
+        });
+    }
+
+    // Add new student or update existing student
+    $('#studentForm').submit(function (e) {
+        e.preventDefault();
+        const name = $('#studentName').val();
+        const course = $('#studentCourse').val();
+        const semester = $('#studentSemester').val();
+        const phonenumber = $('#studentPhonenumber').val();
+
+        if (editingStudentIndex === -1) {
+            // Add new student
+            students.push({ name, course, semester, phonenumber });
+        } else {
+            // Update existing student
+            students[editingStudentIndex] = { name, course, semester, phonenumber };
+            editingStudentIndex = -1;
+            alert("data updated") // Reset after editing
+        }
+
+        renderTable();
+        $('#studentForm')[0].reset(); // Clear the form
+    });
+
+    // Edit student
+    $(document).on('click', '.edit', function () {
+        const index = $(this).data('index');
+        const student = students[index];
+        $('#studentName').val(student.name);
+        $('#studentCourse').val(student.course);
+        $('#studentSemester').val(student.semester);
+        $('#studentPhonenumber').val(student.phonenumber);
+
+        editingStudentIndex = index;
+         // Set the index for editing
+    });
+
+    // Delete student
+    $(document).on('click', '.delete', function () {
+        const index = $(this).data('index');
+        students.splice(index, 1); // Remove the student from the array
+        renderTable();
+    });
+});
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Number Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin-top: 50px;
+        }
+
+        #game {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+
+        #guessInput {
+            width: 50px;
+            margin-right: 10px;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+
+        #restartButton {
+            margin-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="game">
+        <h1>Guess the Number</h1>
+        <p id="instructions">Guess a number between 1 and 100:</p>
+        <input type="number" id="guessInput" min="1" max="100">
+        <button id="guessButton">Guess</button>
+        <p id="result"></p>
+        <button id="restartButton" style="display: none;">Restart Game</button>
+    </div>
+    <script src="./jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            let randomNumber = Math.floor(Math.random() * 100) + 1;
+            let attempts = 0;
+        
+            $('#guessButton').click(function() {
+                const guess = parseInt($('#guessInput').val());
+                attempts++;
+        
+                if (guess === randomNumber) {
+                    $('#result').text(`Congratulations! You guessed the number in ${attempts} attempts.`);
+                    $('#guessButton').prop('disabled', true);
+                    $('#restartButton').show();
+                } else if (guess > randomNumber) {
+                    $('#result').text('Too high! Try again.');
+                } else {
+                    $('#result').text('Too low! Try again.');
+                }
+            });
+        
+            $('#restartButton').click(function() {
+                randomNumber = Math.floor(Math.random() * 100) + 1;
+                attempts = 0;
+                $('#guessInput').val('');
+                $('#result').text('');
+                $('#guessButton').prop('disabled', false);
+                $('#restartButton').hide();
+            });
+        });
+    </script>
+</body>
+</html>

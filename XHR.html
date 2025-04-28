@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: rgb(131, 58, 180);
+            background: linear-gradient(90deg, rgba(131, 58, 180, 1) 0%, rgba(237, 85, 85, 1) 50%, rgba(252, 176, 69, 1) 100%);
+            width: 100vh;
+            height: 100vh;
+
+        }
+
+        #card {
+            height: 30vw;
+            width: 24vw;
+            background-color: white;
+            align-self: center;
+            margin-left: 38vw;
+            margin-right: auto;
+            margin-top: 10vw;
+            text-align: center;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        img {
+            border-radius: 50%;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: rgb(18, 18, 92);
+            color: white;
+            border-radius: 10px;
+            border: none;
+        }
+    </style>
+</head>
+
+<div id="card">
+    <img id="img" src="" alt="">
+    <h3 id="name">John</h3>
+    <h4 id="gender">gender</h4>
+    <h4 id="age">age</h4>
+    <h4 id="email">Email</h4>
+    <h4 id="phone">Phone</h4>
+    <button>new User</button>
+</div>
+
+<body>
+    <script src="./jquery-3.7.1.min.js"></script>
+    <script>
+
+        $("button").click(function () {
+            var xhr = new XMLHttpRequest();
+
+            xhr.open("GET", "https://randomuser.me/api/", true);
+
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    var finaldata = JSON.parse(xhr.responseText);
+                    console.log(finaldata.results[0].picture);
+                    $("#img").attr("src", finaldata.results[0].picture.large)
+                    $("#name").text(finaldata.results[0].name.title + " " + finaldata.results[0].name.first + " " + finaldata.results[0].name.last)
+                    $("#gender").text(finaldata.results[0].gender)
+                    $("#email").text(finaldata.results[0].email)
+                    $("#age").text(finaldata.results[0].dob.age)
+                    $("#phone").text(finaldata.results[0].phone)
+                }
+                else {
+                    console.log("request failed", xhr.status)
+                }
+            }
+
+            xhr.send()
+        });
+    </script>
+</body>
+
+</html>

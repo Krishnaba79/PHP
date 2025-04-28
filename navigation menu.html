@@ -1,0 +1,39 @@
+<html>
+    <title> Navigation Menu</title>
+    <script src="C:\Users\solan\Desktop\SEM-5\PHP\jquery-3.7.1.min.js"></script>
+    <style>
+        .section{
+            display: none;
+        }
+        .active{
+            display: block;
+        }
+    </style>
+    <body>
+        <nav>
+            <ul>
+                <li><a href="#" class="home">Home</a></li>
+                <li><a href="#" class="about">about</a></li>
+                <li><a href="#" class="contact">contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="section home active">
+            <h1> welcome to the home page!</h1>
+        </div>
+        <div class="section about">
+            <h1> welcome to the about page!</h1>
+        </div>
+        <div class="section contact">
+            <h1> Welcome to the contact page</h1>
+        </div>
+
+        <script>
+            $("nav a ").on("click",function(){
+                var section=$(this).attr("class");
+                $(".section").removeClass("active");
+                $("."+section).addClass("active");
+            });
+        </script>
+    </body>
+</html>

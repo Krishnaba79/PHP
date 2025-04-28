@@ -1,0 +1,16 @@
+<html>
+    <body>
+        <p id="para" >Krishaba Solanki</p>
+        <button id="btn">toggle</button>
+        
+        <script src="C:\Users\solan\Desktop\SEM-5\PHP\jquery-3.7.1.min.js"></script>
+
+        <script>
+            $("#btn").click(function(){
+                $("#para").toggle(1000,function(){
+                    console.log("Toogle Effect Completed.")
+                });
+            });
+        </script>
+    </body>
+</html>

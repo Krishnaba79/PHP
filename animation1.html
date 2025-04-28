@@ -1,0 +1,40 @@
+<html>
+    <script src="C:\Users\solan\Desktop\SEM-5\PHP\jquery-3.7.1.min.js"></script>
+    <style>
+        #bg{
+            width:1500px;
+            height: 800px;
+            position: relative;
+        }
+        #char{
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            left: 0;
+            bottom: 350px;
+        }
+        button {
+             position: fixed; top: 0; left: 70%; transform: translateX(-50%);
+  }
+    </style>
+    
+    <body>
+        
+        <img id="bg" src="C:\Users\solan\Desktop\SEM-5\PHP\riverside.jpg" alt="">
+        <img id="char" src="C:\Users\solan\Desktop\SEM-5\PHP\game.webp" alt="">
+        <button>move</button>
+        <script>
+
+            let a = 300;
+            $("button").click(function () {
+                $("#char").css({
+                    "margin-left": a + "px"
+                })
+                a = a + 300;
+            });
+    
+        </script>
+
+    </body>
+
+</html>

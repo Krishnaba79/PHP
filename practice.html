@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #circle{
+            background-color:cadetblue;
+            height: 100px;
+            width: 100px;
+            border-radius: 50%;
+        }
+        #par1{
+            height: 100px;
+            width: 500px;
+        }
+        #btn{
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>1. This Is The First Paragraph</h1>
+    <p id="par1">Paragraphs are the building blocks of papers. 
+        Many students define paragraphs in terms of length: a paragraph is a group of 
+        at least five sentences, a paragraph is half a page long, etc. In reality, though, 
+        the unity and coherence of ideas among sentences is what constitutes a paragraph.
+    </p>
+    <button id="btn1">CLICK</button>
+
+    <h1>2</h1>
+    <div id="circle"></div>
+    <button id="btn">MOVE</button>
+
+    <h1>3</h1>
+    <form>
+        enter num1
+        <input type="number" name="num1" class="num1">
+        enter num2
+        <input type="number" name="num2" class="num2">
+        <button id="sumbtn" type="button" >SUM</button>
+    </form>
+    <p id="p3"></p>
+
+    <script src="./jquery-3.7.1.min.js"></script>   
+
+
+    <script>
+        // 1
+        $("#btn1").click(function () {
+            // $("#par1").hide(1000);
+            // $("#par1").show(1000);
+            $("#par1").toggle(1000);
+        });
+
+        // 2
+        let a = 100;
+        $("#btn").click(function () {
+            $("#circle").css({
+                "margin-left": a + "px"
+            })
+            a = a + 100;
+        });
+
+        // 3
+       
+        let sumbtn = $('#sumbtn').click(function(){
+        let num1 = parseFloat($('.num1').val());
+        let num2 = parseFloat($('.num2').val());
+        let add = num1+num2;
+        $('#p3').text(add);
+        console.log(add);
+        });
+
+    </script>
+</body>
+</html>

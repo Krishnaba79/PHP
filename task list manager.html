@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task List Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .form-container {
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Task List Manager</h1>
+
+    <div class="form-container">
+        <h3>Add a New Task</h3>
+        <form id="taskForm">
+            <label for="taskName">Task Name:</label>
+            <input type="text" id="taskName"><br><br>
+
+            <label for="taskDescription">Task Description:</label>
+            <input type="text" id="taskDescription"><br><br>
+
+            <label for="taskDeadline">Task Deadline:</label>
+            <input type="date" id="taskDeadline"><br><br>
+
+            <button type="button" onclick="addTask()">Add Task</button>
+            <p class="error" id="errorMessage"></p>
+        </form>
+    </div>
+
+    <h3>All Tasks</h3>
+    <table id="taskTable">
+        <thead>
+            <tr>
+                <th>Task Name</th>
+                <th>Description</th>
+                <th>Deadline</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="taskBody">
+        </tbody>
+    </table>
+
+    <script>
+        // Array to store the list of tasks
+        let taskList = [];
+
+        // Function to add a new task
+        function addTask() {
+            // Get form values
+            let taskName = document.getElementById('taskName').value.trim();
+            let taskDescription = document.getElementById('taskDescription').value.trim();
+            let taskDeadline = document.getElementById('taskDeadline').value;
+
+            // Validate that none of the fields are empty
+            if (taskName === "" || taskDescription === "" || taskDeadline === "") {
+                document.getElementById('errorMessage').textContent = "All fields must be filled.";
+                return;
+            }
+
+            // Reset error message
+            document.getElementById('errorMessage').textContent = "";
+
+            // Create task object and add it to taskList
+            let task = {
+                name: taskName,
+                description: taskDescription,
+                deadline: taskDeadline
+            };
+            taskList.push(task);
+
+            // Clear form
+            document.getElementById('taskForm').reset();
+
+            // Display updated task list
+            displayTasks();
+        }
+
+        // Function to display tasks in the table
+        function displayTasks() {
+            let taskBody = document.getElementById('taskBody');
+            taskBody.innerHTML = ''; // Clear the table before adding rows
+
+            taskList.forEach((task, index) => {
+                let row = document.createElement('tr');
+
+                // Task Name
+                let nameCell = document.createElement('td');
+                nameCell.textContent = task.name;
+                row.appendChild(nameCell);
+
+                // Task Description
+                let descriptionCell = document.createElement('td');
+                descriptionCell.textContent = task.description;
+                row.appendChild(descriptionCell);
+
+                // Task Deadline
+                let deadlineCell = document.createElement('td');
+                deadlineCell.textContent = task.deadline;
+                row.appendChild(deadlineCell);
+
+                // Delete button
+                let actionCell = document.createElement('td');
+                let deleteButton = document.createElement('button');
+                deleteButton.textContent = "Delete";
+                deleteButton.onclick = () => deleteTask(index);
+                actionCell.appendChild(deleteButton);
+                row.appendChild(actionCell);
+
+                // Append the row to the table body
+                taskBody.appendChild(row);
+            });
+        }
+
+        // Function to delete a task
+        function deleteTask(index) {
+            taskList.splice(index, 1); // Remove the task from taskList
+            displayTasks(); // Refresh the table
+        }
+    </script>
+
+</body>
+</html>

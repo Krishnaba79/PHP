@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      .flexing {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+      }
+      .flexing img {
+        height: 25vh;
+      }
+      .mainimghe {
+        height: 50vh;
+      }
+      .maindiv {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50vh;
+        margin-top: 20vh;
+        position: relative;
+      }
+      button {
+        padding: 1vh;
+        font-size: 15vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="flexing">
+      <img
+        src="./images/iphone/bluebackforntside.jpg"
+        class="bluebackforntside"
+        alt=""
+      />
+      <img
+        src="./images/iphone/pinkbackfrontside.jpg"
+        class="pinkbackfrontside"
+        alt=""
+      />
+      <img src="./images/iphone/bluebackside.jpg" class="bluebackside" alt="" />
+      <img src="./images/iphone/pinkbackside.jpg" class="pinkbackside" alt="" />
+    </div>
+
+    <div class="maindiv">
+      <button class="pre">‹</button>
+      <img src="" class="mainimghe" alt="" />
+      <div class="mainimg"></div>
+      <button class="next">›</button>
+    </div>
+
+    <script src="./jquery-Document.js"></script>
+    <script>
+      let images = [
+        "./images/iphone/pinkbackfrontside.jpg",
+        "./images/iphone/pinkfrontside.jpg",
+        "./images/iphone/pinkbackside.jpg",
+        "./images/iphone/bluebackforntside.jpg",
+        "./images/iphone/blueforntside.jpg",
+        "./images/iphone/bluebackside.jpg",
+      ];
+
+      // Set initial index to keep track of the current image
+      let currentIndex = 0;
+
+      // Function to update the image based on the current index
+      function updateImage() {
+        $(".mainimghe").attr("src", images[currentIndex]);
+      }
+
+      // Initial load of the first image
+
+      // Click event for Previous button
+      $(".pre").click(function () {
+        if (currentIndex > 0) {
+          currentIndex--;
+        } else {
+          currentIndex = images.length - 1; // Go to last image if at the beginning
+        }
+        updateImage();
+      });
+
+      // Click event for Next button
+      $(".next").click(function () {
+        if (currentIndex < images.length - 1) {
+          currentIndex++;
+        } else {
+          currentIndex = 0; // Go to first image if at the end
+        }
+        updateImage();
+      });
+
+      // Click events to change the main image based on thumbnail clicks
+      $(".bluebackforntside").click(function () {
+        $(".mainimghe").attr("src", "./images/iphone/bluebackforntside.jpg");
+        currentIndex = images.indexOf("./images/iphone/bluebackforntside.jpg");
+      });
+      $(".pinkbackfrontside").click(function () {
+        $(".mainimghe").attr("src", "./images/iphone/pinkbackfrontside.jpg");
+        currentIndex = images.indexOf("./images/iphone/pinkbackfrontside.jpg");
+      });
+      $(".bluebackside").click(function () {
+        $(".mainimghe").attr("src", "./images/iphone/bluebackside.jpg");
+        currentIndex = images.indexOf("./images/iphone/bluebackside.jpg");
+      });
+      $(".pinkbackside").click(function () {
+        $(".mainimghe").attr("src", "./images/iphone/pinkbackside.jpg");
+        currentIndex = images.indexOf("./images/iphone/pinkbackside.jpg");
+      });
+    </script>
+  </body>
+</html>

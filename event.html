@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .form-container {
+            margin-bottom: 20px;
+        }
+        input[type="text"], input[type="email"], input[type="tel"] {
+            padding: 8px;
+            margin: 5px;
+            width: 200px;
+        }
+        button {
+            padding: 10px 15px;
+            margin: 10px 5px;
+            cursor: pointer;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .error {
+            color: red;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Event Registration Form</h2>
+
+    <div class="form-container">
+        <label for="name">Name:</label>
+        <input type="text" id="name" placeholder="Attendee Name">
+        <br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" placeholder="Attendee Email">
+        <br>
+
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" placeholder="Attendee Phone Number">
+        <br>
+
+        <button onclick="registerAttendee()">Register Attendee</button>
+        <div class="error" id="error-msg"></div>
+    </div>
+
+    <h3>Registered Attendees</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="attendee-table-body">
+        </tbody>
+    </table>
+
+    <script>
+        let attendees = [];
+
+        function registerAttendee() {
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const errorMsg = document.getElementById('error-msg');
+
+            // Validate form fields
+            if (name === '' || email === '' || phone === '') {
+                errorMsg.textContent = 'All fields are required.';
+                return;
+            }
+
+            errorMsg.textContent = ''; // Clear error message
+
+            // Add attendee to the list
+            const attendee = { name, email, phone };
+            attendees.push(attendee);
+            updateAttendeeTable();
+            
+            // Clear form fields
+            document.getElementById('name').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('phone').value = '';
+        }
+
+        function updateAttendeeTable() {
+            const tableBody = document.getElementById('attendee-table-body');
+            tableBody.innerHTML = '';
+
+            attendees.forEach((attendee, index) => {
+                const row = document.createElement('tr');
+
+                row.innerHTML = `
+                    <td>${attendee.name}</td>
+                    <td>${attendee.email}</td>
+                    <td>${attendee.phone}</td>
+                    <td><button onclick="deleteAttendee(${index})">Delete</button></td>
+                `;
+
+                tableBody.appendChild(row);
+            });
+        }
+
+        function deleteAttendee(index) {
+            attendees.splice(index, 1);
+            updateAttendeeTable();
+        }
+    </script>
+
+</body>
+</html>

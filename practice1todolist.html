@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* Add a CSS class for strikethrough and background color */
+      .completed {
+        text-decoration: line-through;
+        background-color: #d3d3d3; /* Light gray background for completed tasks */
+        color: #555; /* Optional: change text color for contrast */
+      }
+    </style>
+  </head>
+  <body>
+    <label>Enter your Task here</label>
+    <input type="text" id="task" /><br /><br />
+
+    <button id="submit">Add Task</button>
+
+    <ul id="tasklist"></ul>
+
+    <script src="./jquery-Document.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#submit").click(function () {
+          let task = $("#task").val();
+          let deletbtn = "<button class='delbtn'>Delete</button>";
+          $("#tasklist").append(
+            "<li>" + task + "&nbsp;&nbsp;" + deletbtn + "</li>"
+          );
+          $("#task").val("");
+        });
+
+        // Use event delegation to handle clicks on dynamically added delete buttons
+        $("#tasklist").on("click", ".delbtn", function () {
+          $(this).closest("li").remove();
+        });
+
+        // Toggle strikethrough and background color on clicking the task
+        $("#tasklist").on("click", "li", function () {
+          $(this).toggleClass("completed");
+        });
+      });
+    </script>
+  </body>
+</html>

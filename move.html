@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-image: url("img/bg.png");
+            background-position: center;
+            background-size: cover;
+        }
+
+        button {
+            font-size: 5vw;
+            margin-left: 300px;
+            background-color: red;
+            padding: 30px;
+        }
+
+        img {
+            height: 200px;
+            position: absolute;
+            top: 25vw
+            /* background-color: red; */
+        }
+    </style>
+
+</head>
+<body>
+
+    <img id="character" src="img/character.png" alt="">
+
+    <button>MOVE</button>
+
+    <script src="./jquery-3.7.1.min.js"></script>
+    <script>
+
+        let a = 300;
+        $("button").click(function () {
+            $("#character").css({
+                "margin-left": a + "px"
+            })
+            a = a + 300;
+        });
+
+    </script>
+</body>
+</html>

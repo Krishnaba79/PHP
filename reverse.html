@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <form>
+        enter the string
+        <input type="text" id="text" >
+        <br>
+        reverse string
+        <input type="text" id="revtext" ><br>
+        <button type="button" >Reverse</button>
+    </form>
+    
+    <script src="./jquery-3.7.1.min.js"></script>
+    <script>
+        $('button').click(function(){
+            let text = $('#text').val();
+            let reversedText = text.split('').reverse().join('');
+            $('#revtext').val(reversedText);
+            console.log(text);
+            console.log(reversedText);
+        });
+    </script>
+</body>
+</html>
