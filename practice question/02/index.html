@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="gallery">
+        <img src="thumb1.jpg" class="thumbnail" data-full="full1.jpg" alt="Image 1">
+        <img src="thumb2.jpg" class="thumbnail" data-full="full2.jpg" alt="Image 2">
+        <img src="thumb3.jpg" class="thumbnail" data-full="full3.jpg" alt="Image 3">
+        <img src="thumb4.jpg" class="thumbnail" data-full="full4.jpg" alt="Image 4">
+    </div>
+
+    <div class="preview-area" style="display: none;">
+        <button class="close-btn">Close</button>
+        <button class="prev-btn">Previous</button>
+        <img class="full-image" src="" alt="Full Size">
+        <button class="next-btn">Next</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
