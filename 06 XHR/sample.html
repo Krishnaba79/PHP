@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="">
+        <input id="name" type="text" placeholder="name">
+        <input id="email" type="email" placeholder="email">
+        <input id="username" type="text" placeholder="username">
+    </form>
+    <button id="submit">submit</button>
+    <script src="./jquery-3.7.1.min.js"></script>
+    <script>
+
+
+        $("#submit").click(function () {
+
+            // XHR post request
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "https://jsonplaceholder.typicode.com/users/", true);
+
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    data = xhr.responseText;
+                    console.log(data);
+                }
+                else {
+                    console.log("error");
+                }
+            }
+
+
+            userdata = {
+                name: $("#name").val(),
+                email: $("#email").val(),
+                username: $("#username").val()
+            }
+
+            maindata = JSON.stringify(userdata);
+            xhr.send(maindata);
+        })
+    </script>
+</body>
+
+</html>
